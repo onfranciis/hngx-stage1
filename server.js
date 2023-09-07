@@ -19,7 +19,7 @@ app.get("/api", (req, res) => {
     });
   }
 
-  res.send({
+  res.json({
     slack_name,
     current_day: currentDay,
     utc_time: utcTime.toISOString().slice(0, 19) + "Z",
