@@ -2,10 +2,8 @@ const express = require("express");
 const { dayOfTheWeek } = require("./util");
 const app = express();
 const PORT = process.env.PORT || 1234;
-const now = new Date();
-now.setMilliseconds(null);
-const utc = now.toISOString();
-const currentDay = dayOfTheWeek(now.getUTCDay());
+const utcTime = new Date(Date.now());
+const currentDay = dayOfTheWeek(utcTime.getDay());
 
 app.get("/", (req, res) => {
   res.send({ connected: true });
@@ -23,7 +21,7 @@ app.get("/api", (req, res) => {
   res.send({
     slack_name,
     current_day: currentDay,
-    utc_time: utc.replace(/(?<=.)\.\d{3}/, ""),
+    utc_time: utcTime,
     track,
     github_file_url:
       "https://www.github.com/onfranciis/hngx-stage-1/blob/main/server.js",
