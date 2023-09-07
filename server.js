@@ -22,7 +22,7 @@ app.get("/api", (req, res) => {
   res.send({
     slack_name,
     current_day: currentDay,
-    utc_time: utcTime.toISOString().split(".")[0],
+    utc_time: utcTime.toISOString().split(".")[0] + "Z",
     track,
     github_file_url:
       "https://www.github.com/onfranciis/hngx-stage-1/blob/main/server.js",
