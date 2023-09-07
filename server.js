@@ -7,6 +7,10 @@ const currentDay = dayOfTheWeek(now.getUTCDay());
 const utc = now.toISOString();
 
 app.get("/", (req, res) => {
+  res.send({ connected: true });
+});
+
+app.get("/api", (req, res) => {
   const { slack_name, track } = req.query;
 
   if (!slack_name?.trim() || !track?.trim()) {
