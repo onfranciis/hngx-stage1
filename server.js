@@ -16,11 +16,11 @@ app.get("/", (req, res) => {
 app.get("/api", (req, res) => {
   const { slack_name, track } = req.query;
 
-  if (!slack_name?.trim() || !track?.trim()) {
-    return res.status(400).send({
-      message: `Missing either "slack_name" or "track" query`,
-    });
-  }
+  // if (!slack_name?.trim() || !track?.trim()) {
+  //   return res.status(400).send({
+  //     message: `Missing either "slack_name" or "track" query`,
+  //   });
+  // }
 
   res.json({
     slack_name,
