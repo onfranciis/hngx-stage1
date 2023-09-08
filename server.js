@@ -4,7 +4,8 @@ const app = express();
 const PORT = process.env.PORT || 1234;
 const now = Date.now();
 const utcTime = new Date();
-const gmtPlus1Date = new Date(utcTime.toUTCString()).getTime() + 60 * 60 * 1000;
+const gmtPlus1Date = new Date(utcTime.toUTCString());
+// .getTime() + 60 * 60 * 1000;
 const currentDay = dayOfTheWeek(utcTime.getDay());
 const iso = new Date(gmtPlus1Date).toISOString().slice(0, 19) + "Z";
 
