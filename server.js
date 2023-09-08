@@ -2,12 +2,6 @@ const express = require("express");
 const { dayOfTheWeek } = require("./util");
 const app = express();
 const PORT = process.env.PORT || 1234;
-const now = Date.now();
-const utcTime = new Date();
-const gmtPlus1Date = new Date(utcTime.toUTCString());
-// .getTime() + 60 * 60 * 1000;
-const currentDay = dayOfTheWeek(utcTime.getDay());
-const iso = new Date(gmtPlus1Date).toISOString().slice(0, 19) + "Z";
 
 app.get("/", (req, res) => {
   res.send({ connected: true });
@@ -16,11 +10,16 @@ app.get("/", (req, res) => {
 app.get("/api", (req, res) => {
   const { slack_name, track } = req.query;
 
-  // if (!slack_name?.trim() || !track?.trim()) {
-  //   return res.status(400).send({
-  //     message: `Missing either "slack_name" or "track" query`,
-  //   });
-  // }
+  if (!slack_name?.trim() || !track?.trim()) {
+    return res.status(400).send({
+      message: `Missing either "slack_name" or "track" query`,
+    });
+  }
+
+  const utcTime = new Date();
+  const gmtPlus1Date = new Date(utcTime.toUTCString());
+  const currentDay = dayOfTheWeek(utcTime.getDay());
+  const iso = new Date(gmtPlus1Date).toISOString().slice(0, 19) + "Z";
 
   res.json({
     slack_name,
